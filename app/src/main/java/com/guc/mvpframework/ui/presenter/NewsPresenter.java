@@ -45,6 +45,7 @@ public class NewsPresenter extends BasePresenter <IZhihuNewsView>{
             mRecyclerView.setLayoutManager(layoutManager);
             mTvTopTitle = mNewsView.getTopTitleTextView();
             mSVPTopStories = mNewsView.getTopStoriesViewPager();
+            mSVPTopStories.startAutoRun();
             zhihuApi.getLatestNews()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
