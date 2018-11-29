@@ -45,10 +45,6 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
-        AssetManager mgr = getAssets();//得到AssetManager
-        Typeface tf = Typeface.createFromAsset(mgr, "fonts/rm_albion.ttf");//根据路径得到Typeface
-        mTvSplashInfo.setTypeface(tf);//设置字体
         startLoadingData();
     }
 
