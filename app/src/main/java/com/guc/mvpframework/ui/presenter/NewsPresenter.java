@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.guc.mvpframework.R;
 import com.guc.mvpframework.bean.NewsTimeLine;
 import com.guc.mvpframework.bean.TopStories;
+import com.guc.mvpframework.ui.activity.DefaultStateActivity;
 import com.guc.mvpframework.ui.adapter.AdapterStories;
 import com.guc.mvpframework.ui.base.BasePresenter;
 import com.guc.mvpframework.ui.view.IZhihuNewsView;
@@ -72,7 +73,7 @@ public class NewsPresenter extends BasePresenter <IZhihuNewsView>{
             mSVPTopStories.init(timeLine.getTop_stories(), mTvTopTitle, new TopStoriesViewPager.ViewPagerClickListenner() {
                 @Override
                 public void onClick(TopStories item) {
-
+                    DefaultStateActivity.startUp(context);
                 }
             });
 //            adapter.notifyDataSetChanged();
@@ -81,7 +82,7 @@ public class NewsPresenter extends BasePresenter <IZhihuNewsView>{
             mSVPTopStories.init(timeLine.getTop_stories(), mTvTopTitle, new TopStoriesViewPager.ViewPagerClickListenner() {
                 @Override
                 public void onClick(TopStories item) {
-
+                    DefaultStateActivity.startUp(context);
                 }
             });
             mStoriesAdapter = new AdapterStories(context, timeLine.getStories());

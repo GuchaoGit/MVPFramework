@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StateLayout">
+        <!-- 数据内容布局 -->
+        <attr name="state_content_layout" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="SpreadTextView">
+        <attr name="spread_text_size" format="dimension" />
+        <attr name="spread_text_color" format="color" />
+        <attr name="spread_text_value" format="string" />
+    </declare-styleable>
+</resources>
