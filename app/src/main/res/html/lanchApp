@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>URL打开App</title>
+    </head>
+    <body>
+        <a href="guc://myapp/card?card_id=828">打开豌豆公主App</a>
+        <br />
+        <a href="intent://myapp/card?card_id=828#Intent;scheme=guc;category=android.intent.category.DEFAULT;category=android.intent.category.BROWSABLE;component=com.guc.mvpframework/.ui.activity.SplashActivity;end">
+            打开豌豆公主App
+        </a>
+        <br />
+        <a href="intent://myapp/card?card_id=828#Intent;scheme=guc;category=android.intent.category.DEFAULT;category=android.intent.category.BROWSABLE;end">
+            打开本地应用
+        </a>
+    </body>
+</html>

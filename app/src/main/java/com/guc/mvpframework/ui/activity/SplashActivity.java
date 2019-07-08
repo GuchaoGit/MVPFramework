@@ -1,8 +1,8 @@
 package com.guc.mvpframework.ui.activity;
 
 import android.content.Intent;
-import android.content.res.AssetManager;
-import android.graphics.Typeface;
+import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.widget.RelativeLayout;
@@ -23,14 +23,29 @@ import butterknife.BindView;
  * 描述：
  */
 public class SplashActivity extends BaseActivity {
+    private static final String TAG = "SplashActivity";
     @BindView(R.id.splash_view)
     SplashView mSplashView;
     @BindView(R.id.tv_splash_info)
     TextView mTvSplashInfo;
     @BindView(R.id.main_view)
     RelativeLayout mMainView;
-    private static final String TAG = "SplashActivity";
     private Handler mHandler = new Handler();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        Log.d(TAG, "onCreate: " + intent.toUri(0));
+
+        Intent i = new Intent();
+        i.setAction("android.intent.action.VIEW");
+        i.addCategory("android.intent.category.BROWSABLE");
+        i.addCategory("android.intent.category.DEFAULT");
+        i.setData(Uri.parse("guc://myapp/card?card_id=828"));
+//        i.setComponent(new ComponentName(this,SplashActivity.class));
+        Log.d(TAG, i.toUri(Intent.URI_INTENT_SCHEME));
+    }
 
     @Override
     protected BasePresenter createPresenter() {
