@@ -18,8 +18,8 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //允许为空，不是所有都要实现MVP模式
-        if (createPresenter() != null) {
-            mPresenter = createPresenter();
+        mPresenter = createPresenter();
+        if (mPresenter != null) {
             mPresenter.attachView((V) this);
         }
         setContentView(provideContentViewId());//布局
