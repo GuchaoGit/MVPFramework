@@ -3,7 +3,6 @@ package com.guc.mvpframework.ui.presenter;
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.Adapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,7 +22,7 @@ import rx.schedulers.Schedulers;
  * Created by guc on 2018/9/5.
  * 描述：
  */
-public class NewsPresenter extends BasePresenter <IZhihuNewsView>{
+public class NewsPresenter extends BasePresenter<IZhihuNewsView> {
     private Context context;
     private IZhihuNewsView mNewsView;
     private TopStoriesViewPager mSVPTopStories;
@@ -50,9 +49,8 @@ public class NewsPresenter extends BasePresenter <IZhihuNewsView>{
             zhihuApi.getLatestNews()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(newsTimeLine -> {
-                        disPlayZhihuList(newsTimeLine, context, mNewsView, mRecyclerView);
-                    },this::loadError);
+                    .subscribe(newsTimeLine ->
+                            disPlayZhihuList(newsTimeLine, context, mNewsView, mRecyclerView), this::loadError);
         }
     }
 
@@ -60,14 +58,15 @@ public class NewsPresenter extends BasePresenter <IZhihuNewsView>{
         throwable.printStackTrace();
         Toast.makeText(context, R.string.load_error, Toast.LENGTH_SHORT).show();
     }
+
     String time;
     private boolean isLoadMore = false; // 是否加载过更多
+
     private void disPlayZhihuList(NewsTimeLine newsTimeLine, Context context, IZhihuNewsView iZhihuNewsView, RecyclerView recyclerView) {
         if (isLoadMore) {
             if (time == null) {
                 return;
-            }
-            else {
+            } else {
                 timeLine.getStories().addAll(newsTimeLine.getStories());
             }
             mSVPTopStories.init(timeLine.getTop_stories(), mTvTopTitle, new TopStoriesViewPager.ViewPagerClickListenner() {
