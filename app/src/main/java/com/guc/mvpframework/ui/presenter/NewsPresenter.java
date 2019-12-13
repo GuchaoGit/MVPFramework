@@ -15,6 +15,9 @@ import com.guc.mvpframework.ui.base.BasePresenter;
 import com.guc.mvpframework.ui.view.IZhihuNewsView;
 import com.guc.mvpframework.widget.TopStoriesViewPager;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -46,7 +49,10 @@ public class NewsPresenter extends BasePresenter<IZhihuNewsView> {
             mTvTopTitle = mNewsView.getTopTitleTextView();
             mSVPTopStories = mNewsView.getTopStoriesViewPager();
             mSVPTopStories.startAutoRun();
-            zhihuApi.getLatestNews()
+            Map<String, String> map = new HashMap<>();
+            map.put("params1", "参数1");
+            map.put("params2", "参数2");
+            zhihuApi.getLatestNews(map)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(newsTimeLine ->
