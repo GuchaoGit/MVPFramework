@@ -2,6 +2,9 @@ package com.guc.mvpframework.interceptor;
 
 import android.util.Log;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 import okhttp3.Interceptor;
@@ -32,9 +35,16 @@ public class ResponseInterceptor implements Interceptor {
             ResponseBody responseBody = response.body();
             String result = responseBody.string();
             Log.e(TAG, "result: " + result);
-//            JSONObject jsonObject = new JSONObject();
-//            result = jsonObject.toString();
-//            Log.e(TAG, "trans_result: "+ result );
+            JSONObject jsonObject = null;
+            try {
+                jsonObject = new JSONObject(result);
+                if (jsonObject.has("message")){
+                    result = jsonObject.getString("message");
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Log.e(TAG, "trans_result: "+ result );
             ResponseBody newBody = null;
             try {
                 newBody = ResponseBody.create(null, result);

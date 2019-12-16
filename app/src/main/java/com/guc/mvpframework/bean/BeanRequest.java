@@ -14,14 +14,30 @@ import java.util.List;
 public class BeanRequest {
     public String messageId;
     public String version;
-    public Parameter parameter;
+    private Parameter parameter;
 
+    public BeanRequest(){
+        parameter = new Parameter();
+    }
+
+    public void setDataObjId(String dataObjId){
+        parameter.dataObjId = dataObjId;
+    }
+    public void setRegionalismCode(String regionalismCode){
+        parameter.regionalismCode = regionalismCode;
+    }
+    public void setNetworkCode(String networkCode){
+        parameter.networkCode = networkCode;
+    }
+    public void setConditon(Condition conditon){
+        parameter.condition = conditon;
+    }
     @Override
     public String toString() {
         return new Gson().toJson(this);
     }
 
-    public static class Parameter {
+    private static class Parameter {
         public String dataObjId;
         public String regionalismCode;
         public String networkCode;
@@ -31,9 +47,19 @@ public class BeanRequest {
 
     public static class Condition {
         public String logicalOperate = "and";
-        public List<KeyValue> keyValueList;
+        private List<KeyValue> keyValueList;
 
-        public static class KeyValue {
+        public Condition(){
+            keyValueList = new ArrayList<>();
+        }
+
+        public Condition addKeyValue(String key, String value) {
+            if (!TextUtils.isEmpty(key) && !TextUtils.isEmpty(value)) {
+                keyValueList.add(new KeyValue(key, value));
+            }
+            return this;
+        }
+        private static class KeyValue {
             public String key;
             public String relationOperator = "=";
             public String value;
@@ -41,25 +67,6 @@ public class BeanRequest {
             public KeyValue(String key, String value) {
                 this.key = key;
                 this.value = value;
-            }
-        }
-
-        public static class KeyValueListBuilder {
-            List<KeyValue> mKeyValues;
-
-            public KeyValueListBuilder() {
-                mKeyValues = new ArrayList<>();
-            }
-
-            public KeyValueListBuilder addKeyValue(String key, String value) {
-                if (!TextUtils.isEmpty(key) && !TextUtils.isEmpty(value)) {
-                    mKeyValues.add(new KeyValue(key, value));
-                }
-                return this;
-            }
-
-            public List<KeyValue> build() {
-                return mKeyValues;
             }
         }
     }
