@@ -3,7 +3,7 @@ package com.guc.mvpframework.api;
 import android.util.Log;
 
 import com.guc.mvpframework.MyApp;
-import com.guc.mvpframework.interceptor.ParamsInterceptor;
+import com.guc.mvpframework.interceptor.Params2Interceptor;
 import com.guc.mvpframework.interceptor.ResponseInterceptor;
 import com.guc.mvpframework.utils.StateUtils;
 
@@ -69,12 +69,12 @@ public class ApiRetrofit {
             }
         };
         OkHttpClient client = new OkHttpClient.Builder()
-                .addInterceptor(REWRITE_CACHE_CONTROL_INTERCEPTOR)
-                .addInterceptor(new ParamsInterceptor())
+//                .addInterceptor(REWRITE_CACHE_CONTROL_INTERCEPTOR)
+                .addInterceptor(new Params2Interceptor())
                 .addInterceptor(createHttpLoggingInterceptor())
                 .addInterceptor(new ResponseInterceptor())
-                .cache(cache).build();
-//                .build();
+//                .cache(cache).build();
+                .build();
 
         Retrofit retrofit_zhihu = new Retrofit.Builder()
                 .baseUrl(ZHIHU_BASE_URL)

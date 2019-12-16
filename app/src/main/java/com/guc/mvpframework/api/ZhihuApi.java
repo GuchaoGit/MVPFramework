@@ -5,8 +5,10 @@ import com.guc.mvpframework.bean.SplashImage;
 
 import java.util.Map;
 
+import retrofit2.http.FieldMap;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.QueryMap;
+import retrofit2.http.POST;
 import rx.Observable;
 
 /**
@@ -17,9 +19,9 @@ public interface ZhihuApi {
     @GET("start-image/1080*1920")
     Observable<SplashImage> getSplashImage();
 
-    //    @POST("news/latest")
-//    @FormUrlEncoded()
-//    Observable<NewsTimeLine> getLatestNews(@FieldMap Map<String,String> body);
-    @GET("news/latest")
-    Observable<NewsTimeLine> getLatestNews(@QueryMap Map<String, String> body);
+    @POST("news/latest")
+    @FormUrlEncoded()
+    Observable<NewsTimeLine> getLatestNews(@FieldMap Map<String, String> body);
+//    @GET("news/latest")
+//    Observable<NewsTimeLine> getLatestNews(@QueryMap Map<String, String> body);
 }
